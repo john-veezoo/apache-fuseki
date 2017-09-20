@@ -4,7 +4,7 @@
 ############################################################
 
 # Set the base image to java 8 alpine
-FROM java:8-jre-alpine
+FROM openjdk:9
 
 # File Author / Maintainer
 MAINTAINER JPedro Monteiro
@@ -13,10 +13,10 @@ MAINTAINER JPedro Monteiro
 # Install Apache Fuseki Following the Instructions at Apache Fuseki Docs
 # Ref: https://jena.apache.org/download/index.cgi
 
-RUN wget http://mirror.switch.ch/mirror/apache/dist/jena/binaries/apache-jena-fuseki-2.5.0.zip
-RUN unzip apache-jena-fuseki-2.5.0.zip
-RUN rm apache-jena-fuseki-2.5.0.zip
-RUN mv apache-jena-fuseki-2.5.0 fuseki
+RUN wget -r --no-parent -e robots=off -A 'apache-jena-fuseki-*.zip' http://mirror.switch.ch/mirror/apache/dist/jena/binaries/
+RUN unzip mirror.switch.ch/mirror/apache/dist/jena/binaries/apache-jena-fuseki-*.zip
+RUN rm -fr mirror.switch.ch
+RUN mv apache-jena-fuseki-* fuseki 
 RUN mkdir fuseki/run
 
 ##################### INSTALLATION END #####################
